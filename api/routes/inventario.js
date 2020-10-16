@@ -8,7 +8,7 @@ app.get('/ultimos/:empresa', (req, res) => {
     let empresa = req.params.empresa
 
     knex('detalle_factura')
-        .distinct('nom_pro', 'des_inv', 'pre_ven_inv', 'id_categoria', 'img_inv', 'id_empresa', 'dolar', 'cod_inv')
+        .distinct('nom_pro', 'des_inv', 'pre_ven_inv', 'img_inv', 'id_empresa', 'dolar', 'cod_inv')
         .where('empresa', '=', empresa)
         .innerJoin('inventario', 'inventario.id', '=', 'detalle_factura.id_inventario')
         .innerJoin('empresas', 'empresas.id', '=', 'inventario.id_empresa')
@@ -18,6 +18,7 @@ app.get('/ultimos/:empresa', (req, res) => {
             let productos = []
             data.forEach((data) => {
                 productos.push(data);
+                console.log(productos)
             });
 
             res.json({
